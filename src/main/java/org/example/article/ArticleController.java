@@ -3,14 +3,14 @@ package org.example.article;
 import org.example.Container;
 import org.example.Request;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
 public class ArticleController {
 
     ArticleService articleService;
-    ArticleController(){
+
+    public ArticleController() {
         articleService = new ArticleService();
     }
 
@@ -29,6 +29,9 @@ public class ArticleController {
     }
 
     public void list() {
+        List<Article> articleList = articleService.findAll();
+
+
         System.out.println("번호 / 제목 / 내용");
         System.out.println("----------------------");
         for (int i = articleList.size() - 1; i >= 0; i--) {
@@ -46,13 +49,13 @@ public class ArticleController {
             return;
         }
 
-        Article article = _getFindById(id);
+        Article article = this.articleService._getFindById(id);
 
         if (article == null) {
 
             System.out.printf("%d번 게시물은 존재하지 않습니다.\n", id);
         } else {
-            articleList.remove(article);
+            articleService.remove(article);
 
             System.out.printf("%d번 게시물이 삭제되었습니다.\n", id);
         }
@@ -67,7 +70,7 @@ public class ArticleController {
             return;
         }
 
-        Article article = _getFindById(id);
+        Article article = articleService._getFindById(id);
 
         if (article == null) {
 
@@ -77,26 +80,21 @@ public class ArticleController {
             System.out.printf("제목(기존) : %s\n", article.getSubject());
             System.out.print("제목 : ");
             String modifySubject = Container.getSc().nextLine();
-            article.setSubject(modifySubject);
+
+
             System.out.printf("내용(기존) : %s\n", article.getContent());
             System.out.print("내용 : ");
             String modifyContent = Container.getSc().nextLine();
-            article.setContent(modifyContent);
+
+
+            articleService.update(article, modifySubject, modifyContent);
 
 
             System.out.printf("%d번 게시물이 수정되었습니다.\n", id);
         }
     }
 
-    private Article _getFindById(int id) {
-        for (Article item : articleList) {
-            if (item.getId() == id) {
-                return item;
-            }
-        }
 
-        return null;
-    }
 
     private int _getIntParam(String id) {
         int defaultValue = -1;

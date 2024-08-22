@@ -6,15 +6,15 @@ import org.example.system.SystemController;
 import java.util.Scanner;
 
 public class App {
-    ArticleController articleController;
-    SystemController systemController;
-    App () {
+        ArticleController articleController;
+        SystemController systemController;
+        App () {
         articleController = new ArticleController();
         systemController = new SystemController();
     }
     public void run () {
-        System.out.println("== 게시판 앱 ==");
-        while (true) {
+            System.out.println("== 게시판 앱 ==");
+            while (true) {
             System.out.print("명령) ");
             String command = Container.getSc().nextLine().trim();
             // 커맨드에 입력한 내용을 actionCode, idx로 분류해서 필드로 저장

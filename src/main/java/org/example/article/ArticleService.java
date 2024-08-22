@@ -15,4 +15,32 @@ public class ArticleService {
         return article.getId();
 
     }
+
+    public List<Article> findAll() {
+
+        return articleList;
+    }
+
+    public Article _getFindById(int id) {
+        for (Article item : articleList) {
+            if (item.getId() == id) {
+                return item;
+            }
+        }
+
+        return null;
 }
+
+    public void remove(Article article) {
+        articleList.remove(article);
+    }
+
+    public void update(Article article, String modifySubject, String modifyContent) {
+        article.setSubject(modifySubject);
+        article.setContent(modifyContent);
+
+    }
+}
+
+
+
