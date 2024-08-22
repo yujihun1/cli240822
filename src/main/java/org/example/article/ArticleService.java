@@ -4,40 +4,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArticleService {
-    List<Article> articleList = new ArrayList<>();
-    int lastId=1;
-    public int create(String subject, String content){
-        Article article= new Article(lastId,subject,content);
-        articleList.add(article);
+   ArticleRepository  articleRepository;
 
-        lastId++;
+   public ArticleService() {
+       articleRepository = new ArticleRepository();
+   }
 
-        return article.getId();
+      public int create(String subject,String content){
+       return articleRepository.create(subject,content);
 
     }
 
     public List<Article> findAll() {
 
-        return articleList;
+        return articleRepository.findAll();
     }
 
     public Article _getFindById(int id) {
-        for (Article item : articleList) {
-            if (item.getId() == id) {
-                return item;
-            }
-        }
-
-        return null;
+       return articleRepository.getFindById(id);
 }
 
     public void remove(Article article) {
-        articleList.remove(article);
+        articleRepository.remove(article);
     }
 
-    public void update(Article article, String modifySubject, String modifyContent) {
-        article.setSubject(modifySubject);
-        article.setContent(modifyContent);
+    public void modify(Article article, String modifySubject, String modifyContent) {
+      articleRepository.modify(article,modifySubject,modifyContent);
 
     }
 }

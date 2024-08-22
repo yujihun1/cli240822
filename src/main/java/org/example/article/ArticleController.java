@@ -87,7 +87,7 @@ public class ArticleController {
             String modifyContent = Container.getSc().nextLine();
 
 
-            articleService.update(article, modifySubject, modifyContent);
+            articleService.modify(article, modifySubject, modifyContent);
 
 
             System.out.printf("%d번 게시물이 수정되었습니다.\n", id);
